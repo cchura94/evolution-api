@@ -1,0 +1,30 @@
+version: '3'
+services:
+  postgres_ev:
+    container_name: postgres_ev
+    image: postgres:13
+    restart: unless-stopped
+    volumes:
+      - ./evolution_postgres:/var/lib/postgresql/data
+    env_file:
+      - db.env
+
+  evolution_api:
+    container_name: evolution_api
+    image: atendai/evolution-api
+    restart: always
+    ports:
+      - "8888:8080"
+    env_file:
+      - evolution.env
+    volumes:
+      - ./evolution_instances:/evolution/instances
+      - ./evolution_store:/evolution/store
+    expose:
+      - 8888
+    depends_on:
+      - postgres_ev
+
+# volumes:
+#  evolution_store:
+#  evolution_instances:
