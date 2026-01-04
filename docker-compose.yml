@@ -9,8 +9,8 @@ services:
     env_file:
       - db.env
 
-  evolution_api:
-    container_name: evolution_api
+  evolution_api2:
+    container_name: evolution_api2
     image: evoapicloud/evolution-api
     restart: always
     ports:
